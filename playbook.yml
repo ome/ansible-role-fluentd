@@ -31,6 +31,7 @@
         state: started
 
     - name: ensure /var/log/nginx is accessible
+      become: yes
       file:
         path: /var/log/nginx
         mode: "g+rx"
@@ -38,6 +39,7 @@
         - restart fluentd
 
     - name: copy nginx fluentd config
+      become: yes
       copy:
         src: tests/fluentd-conf/fluentd-nginx.conf
         dest: /etc/td-agent/conf.d/nginx.conf
@@ -45,6 +47,7 @@
         - restart fluentd
 
     - name: add fluentd user to nginx group
+      become: yes
       user:
         name: td-agent
         append: yes

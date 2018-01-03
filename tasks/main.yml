@@ -35,7 +35,8 @@
   changed_when: False
   check_mode: no
 
-- name: fluentd install fluentd plugins
+- name: fluentd | install fluentd plugins
+  become: yes
   command: /usr/sbin/td-agent-gem install {{ item }}
   with_items: "{{ fluentd_plugins }}"
   when: item not in _fluent_plugins.stdout
