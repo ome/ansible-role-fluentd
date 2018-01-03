@@ -16,10 +16,12 @@ def test_nginx(Command, File):
     Command("curl -sf http://localhost/nonexistent.html")
     time.sleep(10)
 
-    txt = File('/var/log/td-agent/nginx/fluentd.log').content_string
-    lines = txt.splitlines()
-    access = lines[-2].split(None, 2)
-    error = lines[-1].split(None, 2)
+    access = File(
+        '/var/log/td-agent/nginx-access/fluentd.log'
+        ).content_string.splitlines()[-1].split(None, 2)
+    error = File(
+        '/var/log/td-agent/nginx-error/fluentd.log'
+        ).content_string.splitlines()[-1].split(None, 2)
 
     assert access[1] == 'nginx.access'
     accessj = json.loads(access[2])

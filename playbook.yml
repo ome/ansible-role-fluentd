@@ -5,6 +5,8 @@
     - role: ansible-role-fluentd
       fluentd_plugins:
         - fluent-plugin-slack
+      fluentd_env:
+        SLACK_TOKEN: xoxp-SECRET-SLACK-TOKEN
 
   # For testing
   tasks:
