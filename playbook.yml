@@ -3,3 +3,5 @@
 - hosts: all
   roles:
     - role: ansible-role-fluentd
+      fluentd_plugins:
+        - fluent-plugin-slack
