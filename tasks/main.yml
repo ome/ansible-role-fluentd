@@ -35,3 +35,12 @@
     enabled: yes
     name: "{{ fluentd_name }}"
     state: started
+
+# TODO: service enabled=yes doesn't work for td-agent for unknown reasons
+# This is a workaround to manually enable the service
+- name: fluentd | workaround service enable bug
+  become: yes
+  file:
+    dest: /etc/systemd/system/multi-user.target.wants/td-agent.service
+    src: /usr/lib/systemd/system/td-agent.service
+    state: link
