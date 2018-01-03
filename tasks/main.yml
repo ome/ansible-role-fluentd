@@ -1,0 +1,37 @@
+---
+# tasks file for roles/fluentd
+
+- name: fluentd | yum repo
+  become: yes
+  copy:
+    src: yum-reposd-fluentd.repo
+    dest: /etc/yum.repos.d/fluentd.repo
+
+- name: fluentd | install
+  become: yes
+  yum:
+    name: "{{ fluentd_name }}"
+    state: present
+  notify:
+    - restart fluentd
+
+- name: fluentd | configuration directory
+  become: yes
+  file:
+    path: /etc/{{ fluentd_name }}/conf.d
+    state: directory
+
+- name: fluentd | main configuration
+  become: yes
+  copy:
+    src: fluentd.conf
+    dest: /etc/{{ fluentd_name }}/{{ fluentd_name }}.conf
+  notify:
+    - restart fluentd
+
+- name: fluentd | start service
+  become: yes
+  service:
+    enabled: yes
+    name: "{{ fluentd_name }}"
+    state: started

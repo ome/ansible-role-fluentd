@@ -1,0 +1,8 @@
+---
+# Handler for fluentd
+
+- name: restart fluentd
+  become: yes
+  service:
+    name: "{{ fluentd_name }}"
+    state: restarted
