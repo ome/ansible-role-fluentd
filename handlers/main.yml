@@ -3,6 +3,7 @@
 
 - name: restart fluentd
   become: yes
-  service:
+  systemd:
+    daemon_reload: yes
     name: "{{ fluentd_name }}"
     state: restarted

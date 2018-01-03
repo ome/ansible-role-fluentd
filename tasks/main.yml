@@ -42,6 +42,20 @@
   notify:
   - restart fluentd
 
+- name: fluentd | systemd configuration
+  become: yes
+  file:
+    path: /etc/systemd/system/{{ fluentd_name }}.service.d
+    state: directory
+
+- name: fluentd | environment variables
+  become: yes
+  template:
+    src: systemd-fluentd-service-d-env-conf.j2
+    dest: /etc/systemd/system/{{ fluentd_name }}.service.d/env.conf
+  notify:
+  - restart fluentd
+
 - name: fluentd | start service
   become: yes
   service:

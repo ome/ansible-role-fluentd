@@ -11,6 +11,7 @@ Variables
 
 Optional:
 - `fluentd_plugins`: List of Fluentd plugins to install, default none. See https://www.fluentd.org/plugins
+- `fluentd_env`: Dictionary of environment variables
 
 
 Configuration
