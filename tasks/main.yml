@@ -49,11 +49,23 @@
     path: /etc/systemd/system/{{ fluentd_name }}.service.d
     state: directory
 
+- name: fluentd | systemd configuration environment file
+  become: yes
+  copy:
+    src: systemd-fluentd-service-d-env.conf
+    dest: /etc/systemd/system/{{ fluentd_name }}.service.d/50-env.conf
+  notify:
+  - restart fluentd
+
 - name: fluentd | environment variables
   become: yes
   template:
-    src: systemd-fluentd-service-d-env-conf.j2
-    dest: /etc/systemd/system/{{ fluentd_name }}.service.d/env.conf
+    src: sysconfig-fluentd.j2
+    dest: /etc/sysconfig/fluentd
+    owner: root
+    group: root
+    # May contain sensitive tokens
+    mode: 0600
   notify:
   - restart fluentd
 

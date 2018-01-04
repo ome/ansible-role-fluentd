@@ -1,6 +1,4 @@
 # {{ ansible_managed }}
-
-[Service]
 {% for key in fluentd_env %}
-Environment={{ key }}={{ fluentd_env[key] | quote }}
+{{ key }}={{ fluentd_env[key] | quote }}
 {% endfor %}
