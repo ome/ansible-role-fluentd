@@ -1,6 +1,9 @@
 ---
 # defaults file for roles/fluentd
 
+# List of groups the agent should be a member of
+fluentd_groups: []
+
 # List of plugins to install
 fluentd_plugins: []
 

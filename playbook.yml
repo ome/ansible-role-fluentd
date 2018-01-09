@@ -1,14 +1,7 @@
 ---
 
+# Do some pre-test setup
 - hosts: all
-  roles:
-    - role: ansible-role-fluentd
-      fluentd_plugins:
-        - fluent-plugin-slack
-      fluentd_env:
-        SLACK_TOKEN: xoxp-SECRET-SLACK-TOKEN
-
-  # For testing
   tasks:
 
     - name: install epel
@@ -35,22 +28,24 @@
       file:
         path: /var/log/nginx
         mode: "g+rx"
-      notify:
-        - restart fluentd
+
+
+# Now test the fluentd role deployment
+- hosts: all
+  roles:
+    - role: ansible-role-fluentd
+      fluentd_groups: nginx
+      fluentd_plugins:
+        - fluent-plugin-slack
+      fluentd_env:
+        SLACK_TOKEN: xoxp-SECRET-SLACK-TOKEN
+
+  tasks:
 
     - name: copy nginx fluentd config
       become: yes
       copy:
         src: tests/fluentd-conf/fluentd-nginx.conf
         dest: /etc/td-agent/conf.d/nginx.conf
-      notify:
-        - restart fluentd
-
-    - name: add fluentd user to nginx group
-      become: yes
-      user:
-        name: td-agent
-        append: yes
-        groups: nginx
       notify:
         - restart fluentd

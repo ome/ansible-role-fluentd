@@ -15,6 +15,16 @@
   notify:
     - restart fluentd
 
+- name: fluentd | add user to groups
+  become: yes
+  user:
+    name: td-agent
+    append: yes
+    groups: "{{ item }}"
+  with_items: "{{ fluentd_groups }}"
+  notify:
+  - restart fluentd
+
 - name: fluentd | configuration directory
   become: yes
   file:
