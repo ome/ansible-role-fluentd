@@ -39,6 +39,7 @@
         - fluent-plugin-slack
       fluentd_env:
         SLACK_TOKEN: xoxp-SECRET-SLACK-TOKEN
+        SLACK_CHANNEL: trash
 
   tasks:
 
