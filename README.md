@@ -1,6 +1,9 @@
 Fluentd
 =======
 
+[![Build Status](https://travis-ci.org/ome/ansible-role-fluentd.svg)](https://travis-ci.org/ome/ansible-role-fluentd)
+[![Ansible Role](https://img.shields.io/ansible/role/41090.svg)](https://galaxy.ansible.com/ome/fluentd/)
+
 Install Fluentd log collector.
 
 Uses the stable commmunity td-agent package supplied by Treasure Data https://docs.fluentd.org/v1.0/articles/install-by-rpm
