@@ -1,0 +1,29 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: instance
+    image: centos/systemd
+    privileged: true
+    command: /sbin/init
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  inventory:
+    host_vars:
+      anon-ftp:
+        docker_storage_driver: vfs
+        # Latest version 17.12.1.ce-1.el7.centos has a bug that prevents
+        # testing on travis: https://github.com/docker/for-linux/issues/219
+        docker_version: 17.09.1.ce-1.el7.centos
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
