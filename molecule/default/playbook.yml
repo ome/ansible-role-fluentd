@@ -1,34 +1,34 @@
 ---
 - name: Converge
   hosts: all
-  
+
   # Do some pre-test setup
-  tasks:
+  pre_tasks:
     - name: install epel
-      become: yes
+      become: true
       yum:
         name: epel-release
         state: present
 
     - name: install nginx
-      become: yes
+      become: true
       yum:
         name: nginx
         state: present
 
     - name: start nginx
-      become: yes
+      become: true
       service:
-        enabled: yes
+        enabled: true
         name: nginx
         state: started
 
     - name: ensure /var/log/nginx is accessible
-      become: yes
+      become: true
       file:
         path: /var/log/nginx
         mode: "g+rx"
-  
+
   # Now test the fluentd role deployment
   roles:
     - role: ansible-role-fluentd
@@ -41,7 +41,7 @@
 
   tasks:
     - name: copy nginx fluentd config
-      become: yes
+      become: true
       copy:
         src: fluentd-conf/fluentd-nginx.conf
         dest: /etc/td-agent/conf.d/nginx.conf
