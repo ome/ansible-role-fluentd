@@ -6,7 +6,7 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance
+  - name: fluentd
     image: centos/systemd
     privileged: true
     command: /sbin/init
