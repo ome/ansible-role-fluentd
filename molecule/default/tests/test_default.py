@@ -7,10 +7,6 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    '.molecule/ansible_inventory').get_hosts('all')
-
-
 def test_service_running_and_enabled(host):
     service = host.service('td-agent')
     assert service.is_running

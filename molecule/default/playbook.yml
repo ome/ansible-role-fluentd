@@ -27,7 +27,7 @@
       become: true
       file:
         path: /var/log/nginx
-        mode: "g+rx"
+        mode: "a+rx"
 
   # Now test the fluentd role deployment
   roles:
