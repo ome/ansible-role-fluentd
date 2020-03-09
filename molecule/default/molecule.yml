@@ -16,7 +16,7 @@ provisioner:
     name: ansible-lint
   inventory:
     host_vars:
-      anon-ftp:
+      fluentd:
         docker_storage_driver: vfs
         # Latest version 17.12.1.ce-1.el7.centos has a bug that prevents
         # testing on travis: https://github.com/docker/for-linux/issues/219
