@@ -2,8 +2,8 @@
 # Handler for fluentd
 
 - name: restart fluentd
-  become: yes
+  become: true
   systemd:
-    daemon_reload: yes
+    daemon_reload: true
     name: "{{ fluentd_name }}"
     state: restarted
