@@ -1,7 +1,7 @@
 Fluentd
 =======
 
-[![Build Status](https://travis-ci.org/ome/ansible-role-fluentd.svg)](https://travis-ci.org/ome/ansible-role-fluentd)
+[![Actions Status](https://github.com/ome/ansible-role-fluentd/workflows/Molecule/badge.svg)](https://github.com/ome/ansible-role-fluentd/actions)
 [![Ansible Role](https://img.shields.io/ansible/role/41884.svg)](https://galaxy.ansible.com/ome/fluentd/)
 
 Install Fluentd log collector.
