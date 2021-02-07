@@ -45,5 +45,6 @@
       copy:
         src: fluentd-conf/fluentd-nginx.conf
         dest: /etc/td-agent/conf.d/nginx.conf
+        mode: 0644
       notify:
         - restart fluentd

@@ -6,6 +6,7 @@
   copy:
     src: yum-reposd-fluentd.repo
     dest: /etc/yum.repos.d/fluentd.repo
+    mode: 0644
 
 - name: fluentd | install
   become: true
@@ -30,12 +31,14 @@
   file:
     path: /etc/{{ fluentd_name }}/conf.d
     state: directory
+    mode: 0755
 
 - name: fluentd | main configuration
   become: true
   copy:
     src: fluentd.conf
     dest: /etc/{{ fluentd_name }}/{{ fluentd_name }}.conf
+    mode: 0644
   notify:
     - restart fluentd
 
@@ -58,12 +61,14 @@
   file:
     path: /etc/systemd/system/{{ fluentd_name }}.service.d
     state: directory
+    mode: 0755
 
 - name: fluentd | systemd configuration environment file
   become: true
   copy:
     src: systemd-fluentd-service-d-env.conf
     dest: /etc/systemd/system/{{ fluentd_name }}.service.d/50-env.conf
+    mode: 0644
   notify:
     - restart fluentd
 
