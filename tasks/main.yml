@@ -13,6 +13,7 @@
   yum:
     name: "{{ fluentd_name }}"
     state: present
+    lock_timeout: "{{ fluentd_yum_lock_timeout }}"
   notify:
     - restart fluentd
 

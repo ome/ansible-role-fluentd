@@ -16,6 +16,7 @@ Optional:
 - `fluentd_groups`: List of additional groups the Fluentd/td-agent user should be a member of, e.g. to allow access to restricted logs, default none
 - `fluentd_plugins`: List of Fluentd plugins to install, default none. See https://www.fluentd.org/plugins
 - `fluentd_env`: Dictionary of environment variables
+- `fluentd_yum_lock_timeout`: Time in seconds to wait for the yum process to free the lockfile
 
 
 Configuration
