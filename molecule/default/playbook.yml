@@ -31,7 +31,7 @@
 
   # Now test the fluentd role deployment
   roles:
-    - role: ansible-role-fluentd
+    - role: ome.fluentd
       fluentd_groups: nginx
       fluentd_plugins:
         - fluent-plugin-slack
