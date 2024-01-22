@@ -4,10 +4,17 @@
 
   # Do some pre-test setup
   pre_tasks:
-    - name: install epel
+    - name: Import a key for epel
+      ansible.builtin.rpm_key:
+        state: present
+        key:  https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+
+    - name: epel | setup dnf repository
       become: true
-      yum:
-        name: epel-release
+      ansible.builtin.dnf:
+        update_cache: true
+        name:
+          https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
         state: present
 
     - name: install nginx
