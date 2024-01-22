@@ -9,9 +9,12 @@ lint: |
     flake8
 platforms:
   - name: fluentd
-    image: centos/systemd
+    image: eniocarboni/docker-rockylinux-systemd:9
     privileged: true
     command: /sbin/init
+    cgroupns_mode: host
+    tmpfs:
+      - /sys/fs/cgroup
 provisioner:
   name: ansible
   lint:
