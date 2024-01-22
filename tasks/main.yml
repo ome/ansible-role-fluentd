@@ -18,7 +18,7 @@
 
 - name: fluentd | install
   become: true
-  yum:
+  ansible.builtin.dnf:
     name: "{{ fluentd_name }}"
     state: present
     lock_timeout: "{{ fluentd_yum_lock_timeout }}"
