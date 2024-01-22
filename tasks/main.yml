@@ -52,14 +52,14 @@
     - restart fluentd
 
 - name: fluentd | list plugins
-  command: /usr/sbin/td-agent-gem list
+  command: fluent-gem list
   register: _fluent_plugins
   changed_when: false
   check_mode: false
 
 - name: fluentd | install fluentd plugins
   become: true
-  command: /usr/sbin/td-agent-gem install {{ item }}
+  command: fluent-gem install {{ item }}
   with_items: "{{ fluentd_plugins }}"
   when: item not in _fluent_plugins.stdout
   notify:
