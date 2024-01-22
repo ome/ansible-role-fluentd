@@ -28,7 +28,7 @@
 - name: fluentd | add user to groups
   become: true
   user:
-    name: td-agent
+    name: "{{ fluentd_name }}"
     append: true
     groups: "{{ item }}"
   with_items: "{{ fluentd_groups }}"
