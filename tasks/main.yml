@@ -1,12 +1,20 @@
 ---
 # tasks file for roles/fluentd
 
-- name: fluentd | yum repo
+- name: Import a key for fluentd
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.treasuredata.com/GPG-KEY-td-agent
+  when: ansible_os_family == 'RedHat'
+
+- name: fluentd | setup dnf repository
   become: true
-  copy:
-    src: yum-reposd-fluentd.repo
-    dest: /etc/yum.repos.d/fluentd.repo
-    mode: 0644
+  ansible.builtin.dnf:
+    update_cache: true
+    name:
+      https://s3.amazonaws.com/packages.treasuredata.com/lts/5/redhat/9/x86_64/fluent-package-5.0.2-1.el9.x86_64.rpm
+    state: present
+  when: ansible_os_family == 'RedHat'
 
 - name: fluentd | install
   become: true
