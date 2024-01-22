@@ -1,0 +1,6 @@
+# https://docs.fluentd.org/installation/install-by-rpm
+[treasuredata]
+name=TreasureData
+baseurl=https://s3.amazonaws.com/packages.treasuredata.com/lts/5/redhat/9/x86_64/fluent-package-5.0.2-1.el9.x86_64.rpm
+gpgcheck=1
+gpgkey=https://packages.treasuredata.com/GPG-KEY-fluent-package
