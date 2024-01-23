@@ -8,7 +8,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 
 def test_service_running_and_enabled(host):
-    service = host.service('td-agent')
+    service = host.service('fluent')
     assert service.is_running
     assert service.is_enabled
 
@@ -18,10 +18,10 @@ def test_nginx(host):
     time.sleep(10)
 
     access = host.file(
-        '/var/log/td-agent/nginx-access/fluentd.log'
+        '/var/log/fluent/nginx-access/fluentd.log'
         ).content_string.splitlines()[-1].split(None, 2)
     error = host.file(
-        '/var/log/td-agent/nginx-error/fluentd.log'
+        '/var/log/fluent/nginx-error/fluentd.log'
         ).content_string.splitlines()[-1].split(None, 2)
 
     assert access[1] == 'nginx.access'
