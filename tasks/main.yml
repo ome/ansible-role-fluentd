@@ -99,18 +99,3 @@
     enabled: true
     name: fluentd
     state: started
-
-- name: Enable fluentd.service
-  systemd:
-    name: fluentd.service
-    daemon_reload: true
-    enabled: true
-
-# TODO: service enabled=yes doesn't work for td-agent for unknown reasons
-# This is a workaround to manually enable the service
-- name: fluentd | workaround service enable bug
-  become: true
-  file:
-    dest: /etc/systemd/system/multi-user.target.wants/fluentd.service
-    src: /usr/lib/systemd/system/fluentd.service
-    state: link
