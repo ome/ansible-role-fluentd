@@ -40,11 +40,6 @@
   roles:
     - role: ome.fluentd
       fluentd_groups: nginx
-      fluentd_plugins:
-        - fluent-plugin-slack
-      fluentd_env:
-        SLACK_TOKEN: xoxp-SECRET-SLACK-TOKEN
-        SLACK_CHANNEL: trash
 
   tasks:
     - name: copy nginx fluentd config
