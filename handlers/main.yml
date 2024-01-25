@@ -5,5 +5,5 @@
   become: true
   systemd:
     daemon_reload: true
-    name: "{{ fluentd_name }}"
+    name: fluentd
     state: restarted

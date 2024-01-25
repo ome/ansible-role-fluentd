@@ -10,8 +10,5 @@ fluentd_plugins: []
 # Environment variables to be set in systemd
 fluentd_env: {}
 
-# The Treasure Data stable fluentd package is called td-agent
-fluentd_name: fluentd
-
 # Time in seconds to wait for the yum process to free the lock file
 fluentd_yum_lock_timeout: 30

@@ -98,5 +98,5 @@
   become: true
   service:
     enabled: true
-    name: "{{ fluentd_name }}"
+    name: fluentd
     state: started
