@@ -46,7 +46,8 @@
       become: true
       copy:
         src: fluentd-conf/fluentd-nginx.conf
-        dest: /etc/fluent/conf.d/nginx.conf
+        #dest: /etc/fluent/conf.d/nginx.conf
+        dest: /etc/fluent/fluentd.conf
         mode: 0644
       notify:
         - restart fluentd

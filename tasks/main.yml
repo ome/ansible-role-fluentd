@@ -4,7 +4,7 @@
 - name: Import a key for fluentd
   ansible.builtin.rpm_key:
     state: present
-    key: https://packages.treasuredata.com/GPG-KEY-td-agent
+    key:  https://s3.amazonaws.com/packages.treasuredata.com/GPG-KEY-td-agent
   when: ansible_os_family == 'RedHat'
 
 - name: fluentd | setup dnf repository
