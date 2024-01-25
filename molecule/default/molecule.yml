@@ -27,10 +27,6 @@ provisioner:
     host_vars:
       fluentd:
         docker_storage_driver: vfs
-      fluentd_plugins:
-        - tail
-        - nginx
-        - fluent-plugin-slack
 
 scenario:
   name: default
