@@ -9,9 +9,16 @@ lint: |
     flake8
 platforms:
   - name: fluentd
-    image: centos/systemd
-    privileged: true
+    image: eniocarboni/docker-rockylinux-systemd:9
+    image_version: latest
     command: /sbin/init
+    privileged: true
+    cgroupns_mode: host
+    groups:
+      - extra_options
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+
 provisioner:
   name: ansible
   lint:
@@ -20,9 +27,7 @@ provisioner:
     host_vars:
       fluentd:
         docker_storage_driver: vfs
-        # Latest version 17.12.1.ce-1.el7.centos has a bug that prevents
-        # testing on travis: https://github.com/docker/for-linux/issues/219
-        docker_version: 17.09.1.ce-1.el7.centos
+
 scenario:
   name: default
 verifier:

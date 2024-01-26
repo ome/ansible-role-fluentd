@@ -4,10 +4,17 @@
 
   # Do some pre-test setup
   pre_tasks:
-    - name: install epel
+    - name: Import a key for epel
+      ansible.builtin.rpm_key:
+        state: present
+        key:  https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+
+    - name: epel | setup dnf repository
       become: true
-      yum:
-        name: epel-release
+      ansible.builtin.dnf:
+        update_cache: true
+        name:
+          https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
         state: present
 
     - name: install nginx
@@ -33,18 +40,13 @@
   roles:
     - role: ome.fluentd
       fluentd_groups: nginx
-      fluentd_plugins:
-        - fluent-plugin-slack
-      fluentd_env:
-        SLACK_TOKEN: xoxp-SECRET-SLACK-TOKEN
-        SLACK_CHANNEL: trash
 
   tasks:
     - name: copy nginx fluentd config
       become: true
       copy:
         src: fluentd-conf/fluentd-nginx.conf
-        dest: /etc/td-agent/conf.d/nginx.conf
+        dest: /etc/fluent/conf.d/fluentd-nginx.conf
         mode: 0644
       notify:
         - restart fluentd

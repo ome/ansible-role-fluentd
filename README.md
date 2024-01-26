@@ -22,7 +22,7 @@ Optional:
 Configuration
 -------------
 
-Configuration files should be placed in `/etc/td-agent/conf.d`.
+Configuration files should be placed in `/etc/fluent/conf.d`.
 
 
 Author Information
