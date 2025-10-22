@@ -9,7 +9,7 @@
 
 - name: fluentd | install
   become: true
-  dnf:
+  ansible.builtin.dnf:
     name: https://s3.amazonaws.com/packages.treasuredata.com/lts/5/redhat/9/x86_64/fluent-package-5.0.2-1.el9.x86_64.rpm
     update_cache: true
     state: present
@@ -19,7 +19,7 @@
 #fluent-package-5.0.2-1.el9.x86_64z
 - name: fluentd | add user to groups
   become: true
-  user:
+  ansible.builtin.user:
     name: td-agent
     append: true
     groups: "{{ item }}"
@@ -29,14 +29,14 @@
 
 - name: fluentd | configuration directory
   become: true
-  file:
+  ansible.builtin.file:
     path: /etc/fluent/conf.d
     state: directory
     mode: 0755
 
 - name: fluentd | main configuration
   become: true
-  copy:
+  ansible.builtin.copy:
     src: fluentd.conf
     dest: /etc/fluent/fluentd.conf
     mode: 0644
@@ -45,7 +45,7 @@
 
 - name: fluentd | list plugins
   #command: /usr/sbin/td-agent-gem list
-  command: /usr/sbin/fluent-gem list
+  ansible.builtin.command: /usr/sbin/fluent-gem list
   register: _fluent_plugins
   changed_when: false
   check_mode: false
@@ -60,7 +60,7 @@
 
 - name: fluentd | install fluentd plugins
   become: true
-  command: /usr/sbin/fluent-gem install {{ item }}
+  ansible.builtin.command: /usr/sbin/fluent-gem install {{ item }}
   with_items: "{{ fluentd_plugins }}"
   when: item not in _fluent_plugins.stdout
   notify:
@@ -68,14 +68,14 @@
 
 - name: fluentd | systemd configuration
   become: true
-  file:
+  ansible.builtin.file:
     path: /etc/systemd/system/fluentd.service.d
     state: directory
     mode: 0755
 
 - name: fluentd | systemd configuration environment file
   become: true
-  copy:
+  ansible.builtin.copy:
     src: systemd-fluentd-service-d-env.conf
     dest: /etc/systemd/system/fluentd.service.d/50-env.conf
     mode: 0644
@@ -84,7 +84,7 @@
 
 - name: fluentd | environment variables
   become: true
-  template:
+  ansible.builtin.template:
     src: sysconfig-fluentd.j2
     dest: /etc/sysconfig/fluentd
     owner: root
@@ -96,7 +96,7 @@
 
 - name: fluentd | start service
   become: true
-  service:
+  ansible.builtin.service:
     enabled: true
     name: fluentd
     state: started
