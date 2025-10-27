@@ -12,7 +12,6 @@
     - name: epel | setup dnf repository
       become: true
       ansible.builtin.dnf:
-        update_cache: true
         name:
           https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
         state: present
