@@ -11,6 +11,7 @@
   become: true
   ansible.builtin.dnf:
     name: https://s3.amazonaws.com/packages.treasuredata.com/lts/5/redhat/9/x86_64/fluent-package-5.0.2-1.el9.x86_64.rpm
+    update_cache: true
     state: present
     lock_timeout: "{{ fluentd_yum_lock_timeout }}"
   notify:
