@@ -19,20 +19,20 @@
 
     - name: install nginx
       become: true
-      yum:
+      ansible.builtin.dnf:
         name: nginx
         state: present
 
     - name: start nginx
       become: true
-      service:
+      ansible.builtin.service:
         enabled: true
         name: nginx
         state: started
 
     - name: ensure /var/log/nginx is accessible
       become: true
-      file:
+      ansible.builtin.file:
         path: /var/log/nginx
         mode: "a+rx"
 
@@ -44,7 +44,7 @@
   tasks:
     - name: copy nginx fluentd config
       become: true
-      copy:
+      ansible.builtin.copy:
         src: fluentd-conf/fluentd-nginx.conf
         dest: /etc/fluent/conf.d/fluentd-nginx.conf
         mode: 0644
